@@ -1,0 +1,14 @@
+{
+  "name": "hospital-core",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend",
+    "microservices/appointment-service"
+  ],
+  "scripts": {
+    "frontend": "npm start --workspace frontend",
+    "backend": "npm start --workspace backend",
+    "appointment": "npm start --workspace microservices/appointment-service"
+  }
+}
