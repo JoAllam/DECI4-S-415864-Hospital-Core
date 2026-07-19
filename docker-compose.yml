@@ -1,0 +1,72 @@
+version: "3.9"
+
+services:
+
+  mongo:
+    image: mongo:8
+    container_name: hospital-mongo
+
+    ports:
+      - "27017:27017"
+
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build: ./backend
+
+    container_name: hospital-backend
+
+    ports:
+      - "5000:5000"
+
+    environment:
+      MONGO_URI: mongodb://mongo:27017/hospital
+
+    depends_on:
+      - mongo
+
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  appointment-service:
+    build: ./microservices/appointment-service
+
+    container_name: appointment-service
+
+    ports:
+      - "5001:5001"
+
+    environment:
+      MONGO_URI: mongodb://mongo:27017/hospital
+
+    depends_on:
+      - mongo
+
+    volumes:
+      - ./microservices/appointment-service:/app
+      - /app/node_modules
+
+  frontend:
+    build: ./frontend
+
+    container_name: hospital-frontend
+
+    ports:
+      - "3000:3000"
+
+    stdin_open: true
+
+    tty: true
+
+    depends_on:
+      - backend
+      - appointment-service
+
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+volumes:
+  mongo-data:

@@ -10,5 +10,10 @@
     "frontend": "npm start --workspace frontend",
     "backend": "npm start --workspace backend",
     "appointment": "npm start --workspace microservices/appointment-service"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.101.2",
+    "axios": "^1.18.1",
+    "react-router-dom": "^7.18.1"
   }
 }
