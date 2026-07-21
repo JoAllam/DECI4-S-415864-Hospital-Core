@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 import Layout from "../components/shared/Layout";
 import PatientList from "../components/patients/PatientList";
@@ -10,28 +11,59 @@ import {
 } from "../services/patientService";
 
 export default function Patients() {
-  const [patients, setPatients] = useState([]);
 
-  useEffect(() => {
-    loadPatients();
-  }, []);
+  const queryClient = useQueryClient();
 
-  const loadPatients = async () => {
-    const data = await getPatients();
-    setPatients(data);
+  const {
+    data: patients = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["patients"],
+    queryFn: getPatients,
+  });
+  
+
+  const addPatientMutation = useMutation({
+  mutationFn: createPatient,
+
+  onMutate: async (newPatient) => {
+    await queryClient.cancelQueries({ queryKey: ["patients"] });
+
+    const previousPatients = queryClient.getQueryData(["patients"]);
+
+    queryClient.setQueryData(["patients"], (old = []) => [
+      ...old,
+      {
+        ...newPatient,
+        _id: Date.now().toString(),
+      },
+    ]);
+
+    return { previousPatients };
+  },
+
+  onError: (err, newPatient, context) => {
+    queryClient.setQueryData(
+      ["patients"],
+      context.previousPatients
+    );
+  },
+
+  onSettled: () => {
+    queryClient.invalidateQueries({
+      queryKey: ["patients"],
+    });
+  },
+});
+
+  const handleAddPatient = (patient) => {
+    addPatientMutation.mutate(patient);
   };
 
-  const handleAddPatient = async (patient) => {
-  try {
-    const newPatient = await createPatient(patient);
-    console.log(newPatient);
+  if (isLoading) return <p>Loading...</p>;
 
-    loadPatients();
-  } catch (error) {
-    console.error(error.response?.data || error.message);
-    alert("Failed to add patient.");
-  }
-};
+  if (error) return <p>Failed to load patients.</p>;
 
   return (
     <Layout>
