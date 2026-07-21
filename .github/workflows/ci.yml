@@ -91,3 +91,28 @@ jobs:
       - name: Run Lighthouse CI
         working-directory: .
         run: npx lhci autorun
+  
+  release:
+    needs:
+      - backend
+      - appointment-service
+      - frontend
+
+    runs-on: ubuntu-latest
+
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm install
+
+      - run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

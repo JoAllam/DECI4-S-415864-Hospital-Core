@@ -18,6 +18,9 @@
   },
   "devDependencies": {
     "@lhci/cli": "^0.15.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "semantic-release": "^25.0.8",
     "serve": "^14.2.6"
   }
 }
