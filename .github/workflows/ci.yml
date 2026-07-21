@@ -13,31 +13,31 @@ on:
 
 jobs:
   backend:
-  runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-  services:
-    mongo:
-      image: mongo:8
-      ports:
-        - 27017:27017
+    services:
+      mongo:
+        image: mongo:8
+        ports:
+          - 27017:27017
 
-  env:
-    MONGO_URI: mongodb://localhost:27017/hospital
+    env:
+      MONGO_URI: mongodb://localhost:27017/hospital
 
-  defaults:
-    run:
-      working-directory: backend
+    defaults:
+      run:
+        working-directory: backend
 
-  steps:
-    - uses: actions/checkout@v4
+    steps:
+      - uses: actions/checkout@v4
 
-    - uses: actions/setup-node@v4
-      with:
-        node-version: 22
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
-    - run: npm install
+      - run: npm install
 
-    - run: npm test
+      - run: npm test
 
   frontend:
     runs-on: ubuntu-latest
