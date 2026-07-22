@@ -14,6 +14,7 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@vercel/node": "^5.8.26",
     "jest": "^30.4.2",
     "nodemon": "^3.1.14",
     "supertest": "^7.2.2"
