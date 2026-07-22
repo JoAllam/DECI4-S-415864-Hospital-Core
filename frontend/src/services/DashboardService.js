@@ -1,14 +1,25 @@
 import { getPatients } from "./patientService";
+import { getAppointments } from "./appointmentService";
 
 export const getDashboardStats = async () => {
-  const patients = await getPatients();
+  const [patients, appointments] = await Promise.all([
+    getPatients(),
+    getAppointments(),
+  ]);
+
+  const today = new Date().toISOString().split("T")[0];
 
   return {
     totalPatients: patients.length,
+
     activePatients: patients.filter(
       (patient) => patient.status === "Active"
     ).length,
-    todaysAppointments: 0,
+
+    todaysAppointments: appointments.filter(
+      (appointment) => appointment.date === today
+    ).length,
+
     pendingRecords: 0,
   };
 };
