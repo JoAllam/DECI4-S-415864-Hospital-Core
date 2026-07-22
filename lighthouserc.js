@@ -11,19 +11,19 @@ module.exports = {
     assert: {
       assertions: {
         "categories:performance": [
-          "warn",
+          "error",
           {
             minScore: 0.5
           }
         ],
         "categories:accessibility": [
-          "warn",
+          "error",
           {
             minScore: 0.5
           }
         ],
         "categories:best-practices": [
-          "warn",
+          "error",
           {
             minScore: 0.5
           }

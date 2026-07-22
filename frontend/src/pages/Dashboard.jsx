@@ -30,21 +30,25 @@ export default function Dashboard() {
         <DashboardCard
           title="Total Patients"
           value={stats.totalPatients}
+          data-testid="total-patients"
         />
 
         <DashboardCard
           title="Active Patients"
           value={stats.activePatients}
+          data-testid="active-patients"
         />
 
         <DashboardCard
           title="Total Appointments"
           value={stats.todaysAppointments}
+          data-testid="total-appointments"
         />
 
         <DashboardCard
           title="Pending Records"
           value={stats.pendingRecords}
+          data-testid="pending-records"
         />
       </div>
     </Layout>

@@ -28,7 +28,7 @@ export default function Appointments() {
   const handleAddAppointment = async (appointment) => {
     try {
       await createAppointment(appointment);
-      loadAppointments();
+      await loadAppointments();
     } catch (error) {
       console.error(error);
       alert("Failed to create appointment.");
