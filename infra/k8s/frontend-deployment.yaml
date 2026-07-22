@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: deci4-s-415864-hopital-core-frontend:latest
+          image: deci4-s-415864-hospital-core-frontend:latest
           imagePullPolicy: Never
 
           ports:

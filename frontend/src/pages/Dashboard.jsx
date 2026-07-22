@@ -38,7 +38,7 @@ export default function Dashboard() {
         />
 
         <DashboardCard
-          title="Today's Appointments"
+          title="Total Appointments"
           value={stats.todaysAppointments}
         />
 

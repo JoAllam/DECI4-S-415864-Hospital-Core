@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: appointment-service
-          image: deci4-s-415864-hopital-core-appointment-service:latest
+          image: deci4-s-415864-hospital-core-appointment-service:latest
           imagePullPolicy: Never
 
           ports:
