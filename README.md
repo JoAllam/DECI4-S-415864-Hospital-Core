@@ -3,6 +3,16 @@
 ## Overview
 Hospital Core is a full-stack hospital management platform developed as a mono-repository. It demonstrates a modern healthcare application using React, Express, MongoDB, Docker, Kubernetes, CI/CD automation, cloud deployment, and automated testing.
 
+## Known Deployment Note
+
+> **Netlify Accessibility**
+>
+> During testing, the deployed frontend on Netlify may not be accessible from some networks or regions (including my local network in Egypt), where the browser returns *"This site can't be reached"*.
+>
+> The application itself is deployed correctly and can be accessed successfully from other networks. For demonstration purposes, I used a VPN when accessing the Netlify deployment from my location. The backend APIs hosted on Vercel remain accessible independently.
+>
+> If the Netlify deployment cannot be reached from your network, the project can also be run locally using the setup instructions provided above.
+
 ---
 
 # Features
@@ -51,8 +61,17 @@ Hospital Core is a full-stack hospital management platform developed as a mono-r
 │   └── appointment-service/
 ├── tests/
 │   └── e2e/
-├── .github/workflows/
+├── .github/
+│   └── workflows/
+│       └── ci.yml
 ├── docker-compose.yml
+├── package.json
+├── package-lock.json
+├── playwright.config.js
+├── lighthouserc.js
+├── .releaserc.json
+├── .env.example
+├── .gitignore
 └── README.md
 ```
 
